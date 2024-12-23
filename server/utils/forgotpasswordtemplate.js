@@ -15,4 +15,4 @@ const forgotPasswordTemplate = ({ name, otp })=>{
     `
 }
 
-module.exports = forgotPasswordTemplate;
+export default forgotPasswordTemplate

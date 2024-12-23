@@ -7,5 +7,4 @@ const verifyEmailTemplate = ({name,url})=>{
 </a>
 `
 }
-
-module.exports = verifyEmailTemplate;
+export default verifyEmailTemplate

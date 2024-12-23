@@ -1,31 +1,36 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const connectDB = require('./dbconfig/dbconfig');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import connectDB from './dbconfig/dbconfig.js';
+import userRouter from './routes/user.route.js';
 dotenv.config();
 
 const app = express();
 app.use(cors({
-    credentials: true,
-    origin : process.env
+    credentials : true,
+    origin : process.env.DOMAIN
 }));
 app.use(express.json());
-app.use(cookieParser());
-app.use(morgan("combined"));
+app.use(cookieParser())
+app.use(morgan("combined")); 
 app.use(helmet({
     crossOriginResourcePolicy : false
 }))
-const PORT = process.env.PORT || 5000;
-app.get('/', (req, res) => {
-    res.json({
-        message : "Server is running" + PORT
+const PORT = process.env.PORT
+app.get("/",(request,response)=>{
+    //server to client 
+    response.json({
+        message : "Server is Running" + PORT
     })
 })
-connectDB().then(() => {
+connectDB().then(()=>{
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
-    });
+    })
 })
+app.use('/api/user',userRouter);
+
+

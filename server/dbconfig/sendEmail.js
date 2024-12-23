@@ -1,6 +1,5 @@
-const dotenv = require('dotenv');
-const Resend = require('resend');
-
+import { Resend } from 'resend';
+import dotenv from 'dotenv'
 dotenv.config()
 
 if(!process.env.RESEND_API_KEY){
@@ -28,4 +27,4 @@ const sendEmail = async({sendTo, subject, html })=>{
     }
 }
 
-module.exports = sendEmail;
+export default sendEmail

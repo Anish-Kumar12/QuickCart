@@ -1,4 +1,5 @@
-const cloudinary = require("cloudinary").v2
+import { v2 as cloudinary } from 'cloudinary';
+
 cloudinary.config({
     cloud_name : process.env.CLODINARY_CLOUD_NAME,
     api_key : process.env.CLODINARY_API_KEY,
@@ -17,4 +18,4 @@ const uploadImageClodinary = async(image)=>{
     return uploadImage
 }
 
-module.exports = uploadImageClodinary;
+export default uploadImageClodinary

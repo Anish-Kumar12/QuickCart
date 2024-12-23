@@ -1,17 +1,17 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const sendEmail = require('../utils/sendEmail.js');
-const verifyEmailTemplate = require('../utils/verifyEmailTemplate.js');
-const dotenv = require('dotenv');
-const generateAccessToken = require('../utils/generateAccessToken.js');
-const generateRefreshToken = require('../utils/generateRefreshToken.js');
-const uploadImageCloudinary = require('../utils/uploadImageCloudinary.js');
-const generateOtp = require('../utils/generateOtp.js');
-const forgotPasswordTemplate = require('../utils/forgotpasswordtemplate.js');
-const UserModel = require('../models/UserModel');
+import UserModel from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import sendEmail from "../dbconfig/sendEmail.js";
+import verifyEmailTemplate from "../utils/verifyTemplate.js";
+import dotenv from "dotenv";
+import generateAccessToken from "../utils/generateAccessToken.js";
+import generateRefreshToken from "../utils/generateRefreshToken.js";
+import uploadImageCloudinary from "../utils/uploadImageClouninary.js";
+import generateOtp from "../utils/generateOtp.js";
+import forgotPasswordTemplate from "../utils/forgotpasswordtemplate.js";
 dotenv.config();
 
-module.exports.registerCaptain = async (request,response) => {
+export async function registerUserController(request,response){
     try {
         const { name, email , password } = request.body
 
@@ -71,7 +71,7 @@ module.exports.registerCaptain = async (request,response) => {
         })
     }
 }
-module.exports.verifyEmailController = async (request,response) => {
+export async function verifyEmailController(request,response){
     try{
         const {code} = request.query
         const user = await UserModel.findById(code)
@@ -100,7 +100,7 @@ module.exports.verifyEmailController = async (request,response) => {
         })
     }
 }
-module.exports.loginController = async (request,response) => {
+export async function loginController(request,response){
     try {
         const { email, password } = request.body
 
@@ -165,8 +165,7 @@ module.exports.loginController = async (request,response) => {
         })
     }
 }
-module.exports.logoutController = async (request,response) => {
-
+export async function logoutController(request,response){
     try{
         const userid = request.userId
         
@@ -196,7 +195,7 @@ module.exports.logoutController = async (request,response) => {
         })
     }
 }
-module.exports.uploadAvatar = async (request,response) => {
+export async function uploadAvatar(request,response){
     try{
         const userId = request.userId
         const image = request.file
@@ -223,7 +222,7 @@ module.exports.uploadAvatar = async (request,response) => {
         })
     }
 }
-module.exports.updateUserDetails = async (request,response) => {
+export async function updateUserDetails(request,response){
     try {
         const userId = request.userId //auth middleware
         const { name, email, mobile, password } = request.body 
@@ -260,7 +259,7 @@ module.exports.updateUserDetails = async (request,response) => {
         })
     }
 }
-module.exports.forgotPasswordController = async (request,response) => {
+export async function forgotPasswordController(request,response){
      try{
         const {email} = request.body
         const user = await UserModel.findOne({email})
@@ -297,7 +296,7 @@ module.exports.forgotPasswordController = async (request,response) => {
          })
     }
  }
-module.exports.verifyforgotpasswordotp = async (request,response) => {
+export async function verifyforgotpasswordotp(request,response){
     try{
         const {email,otp} = request.body
         if(!email || !otp){
@@ -347,7 +346,7 @@ module.exports.verifyforgotpasswordotp = async (request,response) => {
         })
     }
 }
-module.exports.resetPasswordController = async (request,response) => {
+export async function resetPasswordController(request,response){
     try{
         const {email,password,confirmpassword} = request.body
         if(!email || !password || !confirmpassword){
@@ -392,8 +391,7 @@ module.exports.resetPasswordController = async (request,response) => {
         })
     }
 }
-
-module.exports.refreshTokenController = async (request,response) => {
+export async function refreshTokenController(request,response){
     try{
         const refreshToken = request.cookies.refreshtoken || request?.headers?.authorization.split(" ")[1]
         if(!refreshToken){

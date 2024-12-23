@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+
 const categorySchema = new mongoose.Schema({
     name : {
         type : String,
@@ -12,4 +13,6 @@ const categorySchema = new mongoose.Schema({
     timestamps : true
 })
 
-module.exports = mongoose.model('category', categorySchema);
+const CategoryModel = mongoose.model('category',categorySchema)
+
+export default CategoryModel
