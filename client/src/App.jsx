@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-    <div className='text-red-300'>
-      Home
-    </div>
+      <Header />
+      <main className="min-h-[78vh]">
+        <Outlet />
+      </main>
+      <Footer/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
