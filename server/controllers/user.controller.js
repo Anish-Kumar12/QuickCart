@@ -45,7 +45,7 @@ export async function registerUserController(request,response){
         const newUser = new UserModel(payload)
         const save = await newUser.save()
 
-        const VerifyEmailUrl = `${process.env.DOMAIN}/verify-email?code=${save?._id}`
+        const VerifyEmailUrl = `${process.env.DOMAIN}/api/user/verify-email?code=${save?._id}`
 
         const verifyEmail = await sendEmail({
             sendTo : email,
@@ -195,31 +195,48 @@ export async function logoutController(request,response){
         })
     }
 }
-export async function uploadAvatar(request,response){
-    try{
-        const userId = request.userId
-        const image = request.file
-        const upload = await uploadImageCloudinary(image)
-        const updateUser = await UserModel.findByIdAndUpdate(userId,{
-            avatar : upload.url
-        })
-        
+export async function uploadAvatar(request, response) {
+    try {
+        const userId = request.userId;
+        const image = request.file;
+
+        if (!userId) {
+            return response.status(400).json({
+                message: "User ID is required",
+                error: true,
+                success: false
+            });
+        }
+
+        const user = await UserModel.findById(userId);
+
+        if (!user) {
+            return response.status(404).json({
+                message: "User not found",
+                error: true,
+                success: false
+            });
+        }
+
+        const upload = await uploadImageCloudinary(image);
+
+        user.avatar = upload.url;
+        await user.save();
+
         return response.json({
-            message : "Image uploaded successfully",
-            error : false,
-            success : true,
-            data : {
-                id : updateUser._id,
-                avatar : upload.url
+            message: "Image uploaded successfully",
+            error: false,
+            success: true,
+            data: {
+                avatar: upload.url
             }
-        })
-    }
-    catch(error){
+        });
+    } catch (error) {
         return response.status(500).json({
-            message : error.message || error,
-            error : true,
-            success : false
-        })
+            message: error.message || error,
+            error: true,
+            success: false
+        });
     }
 }
 export async function updateUserDetails(request,response){
