@@ -17,13 +17,13 @@ const Search = () => {
     navigate("/search");
   };
   return (
-    <div className="w-full min-w-[300px] lg:min-w-[420px] h-12 rounded-lg overflow-hidden flex items-center border text-neutral-600 bg-slate-50 group-focus ">
-      <button className="flex justify-center items-center h-full p-3">
+    <div className="w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200 ">
+      <button className="flex justify-center items-center h-full p-3 group-focus-within:text-primary-200">
         <IoSearch size={22} />
       </button>
       <div>
         {!isSearchPage ? (
-          <div onClick={redirecttoSearch}>
+          <div onClick={redirecttoSearch} className='w-full h-full flex items-center'>
             <TypeAnimation
               sequence={[
                 'Search "milk"',
@@ -50,7 +50,7 @@ const Search = () => {
             />
           </div>
         ) : (
-          <div className="w-full">
+          <div className="w-full h-full">
             <input
               type="text"
               placeholder="Search for products"
