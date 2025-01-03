@@ -8,6 +8,8 @@ import ForgotPassword from '../pages/ForgotPassword.jsx';
 import OtpVerification from '../pages/OtpVerification.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
 import UserMenuMobile from '../pages/UserMenuMobile.jsx';
+import Dashboard from '../layouts/Dashboard.jsx';
+import Profile from '../pages/Profile.jsx';
 
 const router = createBrowserRouter([
     {
@@ -15,37 +17,48 @@ const router = createBrowserRouter([
         element : <App/>,
         children : [
             {
-                path : "/",
+                path : "",
                 element : <Home/>
             },
             {
-                path : "/search",
+                path : "search",
                 element : <Search/>
             },
             {
-                path : "/login",
+                path : "login",
                 element : <Login/>
             },
             {
-                path : "/register",
+                path : "register",
                 element : <Register/>
             },
             {
-                path : "/forgot-password",
+                path : "forgot-password",
                 element : <ForgotPassword/>
             },
             {
-                path : "/verification-otp",
+                path : "verification-otp",
                 element : <OtpVerification/>
             },
             {
-                path : "/reset-password",
+                path : "reset-password",
                 element : <ResetPassword/>
             },
             {
                 path : "user",
                 element : <UserMenuMobile/>
             },
+            {
+                path : "dashboard",
+                element : <Dashboard/>,
+                children : [
+                    {
+                        path : "profile",
+                        element : <Profile/>
+                    }
+
+                ]
+            }
         ]
     }
 ]);
