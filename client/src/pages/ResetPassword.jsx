@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SummaryApi from '../common/SummaryApi'
-import toast from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
 import Axios from '../utils/Axios'
 
@@ -50,6 +50,8 @@ const ResetPassword = () => {
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
+
+    console.log("data",data)
 
     ///optional 
     if(data.newPassword !== data.confirmPassword){
@@ -142,6 +144,7 @@ const ResetPassword = () => {
                     <button disabled={!valideValue} className={` ${valideValue ? "bg-green-800 hover:bg-green-700" : "bg-gray-500" }    text-white py-2 rounded font-semibold my-3 tracking-wide`}>Change Password</button>
 
                 </form>
+                <Toaster/>
 
                 <p>
                     Already have account? <Link to={"/login"} className='font-semibold text-green-700 hover:text-green-800'>Login</Link>

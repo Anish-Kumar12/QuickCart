@@ -365,15 +365,16 @@ export async function verifyforgotpasswordotp(request,response){
 }
 export async function resetPasswordController(request,response){
     try{
-        const {email,password,confirmpassword} = request.body
-        if(!email || !password || !confirmpassword){
+        console.log("reset password",request.body)
+        const {email,newPassword,confirmPassword} = request.body
+        if(!email || !newPassword || !confirmPassword){
             return response.status(400).json({
                 message : "provide email, password, confirmpassword",
                 error : true,
                 success : false
             })
         }
-        if(password !== confirmpassword){
+        if(newPassword !== confirmPassword){
             return response.status(400).json({
                 message : "Password not match",
                 error : true,
@@ -389,7 +390,7 @@ export async function resetPasswordController(request,response){
             })
         }
         const salt = await bcrypt.genSalt(10)
-        const hashPassword = await bcrypt.hash(password,salt)
+        const hashPassword = await bcrypt.hash(newPassword,salt)
         const updateUser = await UserModel.findOneAndUpdate({email},{
             password : hashPassword
         })
