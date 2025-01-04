@@ -444,7 +444,7 @@ export async function resetpassword(request,response){
 //refresh token controler
 export async function refreshToken(request,response){
     try {
-        const refreshToken = request.cookies.refreshToken || request?.headers?.authorization?.split(" ")[1]  /// [ Bearer token]
+        const refreshToken = request.cookies.refreshToken || request?.headers?.authorization?.split(" ")[1]  
 
         if(!refreshToken){
             return response.status(401).json({
@@ -499,8 +499,6 @@ export async function refreshToken(request,response){
 export async function userDetails(request,response){
     try {
         const userId  = request.userId
-
-        console.log(userId)
 
         const user = await UserModel.findById(userId).select('-password -refresh_token')
 
