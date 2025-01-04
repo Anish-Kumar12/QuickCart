@@ -66,7 +66,23 @@ export const getCategoryController = async (request, response) => {
 export const updateCategoryController = async (request, response) => {
   try {
     const { _id, name, image } = request.body;
+    
+    const existingCategory = await CategoryModel.findById(_id);
+    if (!existingCategory) {
+      return response.status(404).json({
+        message: "Category not found",
+        error: true,
+        success: false,
+      });
+    }
+    if (existingCategory.image !== image) {
+      const publicIdMatch = existingCategory.image.match(/\/([^\/]+)\.[^\/]+$/);
+      const publicId = publicIdMatch ? publicIdMatch[1] : null;
 
+      if (publicId) {
+        await deleteImageCloudinary(publicId);
+      }
+    }
     const update = await CategoryModel.updateOne(
       {
         _id: _id,
@@ -115,12 +131,9 @@ export const deleteCategoryController = async (request, response) => {
         success: false,
       });
     }
-    // Extract public ID from image URL
     const category = await CategoryModel.findOne({ _id: _id });
     const publicIdMatch = category.image.match(/\/([^\/]+)\.[^\/]+$/);
     const publicId = publicIdMatch ? publicIdMatch[1] : null;
-
-    console.log("publicId", publicId);
 
     if (publicId) {
       await deleteImageCloudinary(publicId);
