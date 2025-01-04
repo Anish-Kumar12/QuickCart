@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs'
 import verifyEmailTemplate from '../utils/verifyTemplate.js'
 import generatedAccessToken from '../utils/generateAccessToken.js'
 import genertedRefreshToken from '../utils/generateRefreshToken.js'
-import uploadImageClodinary from '../utils/uploadImageClouninary.js'
+import { uploadImageCloudinary } from '../utils/uploadImageCloudinary.js'
 import generatedOtp from '../utils/generateOtp.js'
 import forgotPasswordTemplate from '../utils/forgotpasswordtemplate.js'
 import jwt from 'jsonwebtoken'
@@ -216,7 +216,7 @@ export async  function uploadAvatar(request,response){
         const userId = request.userId // auth middlware
         const image = request.file  // multer middleware
 
-        const upload = await uploadImageClodinary(image)
+        const upload = await uploadImageCloudinary(image)
         
         const updateUser = await UserModel.findByIdAndUpdate(userId,{
             avatar : upload.url
