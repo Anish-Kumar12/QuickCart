@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import connectDB from './dbconfig/dbconfig.js';
 import userRouter from './routes/user.route.js';
+import categoryRouter from './routes/category.route.js';
+import uploadRouter from './routes/upload.route.js';
 dotenv.config();
 
 const app = express();
@@ -26,11 +28,14 @@ app.get("/",(request,response)=>{
         message : "Server is Running" + PORT
     })
 })
+app.use('/api/user',userRouter);
+app.use("/api/category",categoryRouter)
+app.use("/api/file",uploadRouter)
+
 connectDB().then(()=>{
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
     })
 })
-app.use('/api/user',userRouter);
 
 
