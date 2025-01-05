@@ -1,4 +1,5 @@
 import SubCategoryModel from "../models/subCategory.model.js";
+import { deleteImageCloudinary } from "../utils/uploadImageCloudinary.js";
 
 export const AddSubCategoryController = async (request, response) => {
   try {

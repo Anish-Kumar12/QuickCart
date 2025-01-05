@@ -7,6 +7,7 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
+import deleteImage from '../utils/deleteImage';
 
 const UploadSubCategoryModel = ({close, fetchData}) => {
     const [subCategoryData,setSubCategoryData] = useState({
@@ -31,7 +32,8 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
         const file = e.target.files[0]
 
         if(!file){
-            return
+            console.log("No file selected")
+            return  
         }
 
         const response = await uploadImage(file)
@@ -54,6 +56,19 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
             }
         })
     }
+    const handleIncidentalRemove = async (e) =>{
+        const url = subCategoryData.image
+        const response = await deleteImage(url);
+    
+        if(response.success){
+          setSubCategoryData((preve) => {
+            return {
+                ...preve,
+                image: "",
+            };
+          });
+        }
+      }
 
     const handleSubmitSubCategory = async(e)=>{
         e.preventDefault()
@@ -88,7 +103,7 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
             <div className='flex items-center justify-between gap-3'>
                 <h1 className='font-semibold'>Add Sub Category</h1>
                 <button onClick={close}>
-                    <IoClose size={25}/>
+                    <IoClose size={25} onClick={handleIncidentalRemove}/>
                 </button>
             </div>
             <form className='my-3 grid gap-3' onSubmit={handleSubmitSubCategory}>

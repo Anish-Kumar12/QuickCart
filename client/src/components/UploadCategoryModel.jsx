@@ -5,6 +5,7 @@ import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
+import deleteImage from "../utils/deleteImage";
 
 const UploadCategoryModel = ({ close, fetchData }) => {
   const [data, setData] = useState({
@@ -64,13 +65,26 @@ const UploadCategoryModel = ({ close, fetchData }) => {
       };
     });
   };
+  const handleIncidentalRemove = async (e) =>{
+    const url = data.image
+    const response = await deleteImage(url);
+
+    if(response.success){
+      setData((preve) => {
+        return {
+          ...preve,
+          image: "",
+        };
+      });
+    }
+  }
   return (
     <section className="fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center">
       <div className="bg-white max-w-4xl w-full p-4 rounded">
         <div className="flex items-center justify-between">
           <h1 className="font-semibold">Category</h1>
           <button onClick={close} className="w-fit block ml-auto">
-            <IoClose size={25} />
+            <IoClose size={25} onClick={handleIncidentalRemove} />
           </button>
         </div>
         <form className="my-3 grid gap-2" onSubmit={handleSubmit}>

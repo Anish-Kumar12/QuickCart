@@ -6,8 +6,11 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import toast, { Toaster } from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
+import deleteImage from '../utils/DeleteImage';
 
 const EditSubCategory = ({close,data,fetchData}) => {
+    const [originalImage, setOriginalImage] = useState(data.image);
+
     const [subCategoryData,setSubCategoryData] = useState({
         _id : data._id,
         name : data.name,
@@ -27,6 +30,25 @@ const EditSubCategory = ({close,data,fetchData}) => {
             }
         })
     }
+    const handleIncidentalRemove = async (e) =>{
+        const url = subCategoryData.image
+        if(url !== originalImage){
+            const response = await deleteImage(url)
+
+            if(response.success){
+                setSubCategoryData((preve)=>{
+                    return{
+                        ...preve,
+                        image : originalImage
+                    }
+                });
+              }
+        }
+        else{
+            return
+        }    
+
+      }
 
     const handleUploadSubCategoryImage = async(e)=>{
         const file = e.target.files[0]
@@ -89,7 +111,7 @@ const EditSubCategory = ({close,data,fetchData}) => {
             <div className='flex items-center justify-between gap-3'>
                 <h1 className='font-semibold'>Edit Sub Category</h1>
                 <button onClick={close}>
-                    <IoClose size={25}/>
+                    <IoClose size={25} onClick={handleIncidentalRemove}/>
                 </button>
             </div>
             <form className='my-3 grid gap-3' onSubmit={handleSubmitSubCategory}>

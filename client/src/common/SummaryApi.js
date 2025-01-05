@@ -49,6 +49,10 @@ const SummaryApi = {
     url: "/api/file/upload",
     method: "post",
   },
+  deleteImage: {
+    url: "/api/file/delete",
+    method: "delete",
+  },
   getCategory: {
     url: "/api/category/get",
     method: "get",
