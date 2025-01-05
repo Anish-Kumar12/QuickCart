@@ -11,6 +11,7 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import successAlert from '../utils/successAlert';
+import deleteImage from '../utils/deleteImage';
 
 const UploadProduct = () => {
   const [data,setData] = useState({
@@ -69,12 +70,19 @@ const UploadProduct = () => {
   }
 
   const handleDeleteImage = async(index)=>{
-      data.image.splice(index,1)
-      setData((preve)=>{
-        return{
+
+      const url = data.image[index]
+      const response = await deleteImage(url)
+      if(response.success){
+        data.image.splice(index,1)
+        setData((preve)=>{
+          return{
             ...preve
-        }
-      })
+          }
+        })
+      }
+
+
   }
 
   const handleRemoveCategory = async(index)=>{
