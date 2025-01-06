@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from '../utils/UploadImage';
 import Loading from '../components/Loading';
@@ -10,8 +10,8 @@ import AddFieldComponent from '../components/AddFieldComponent';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
-import successAlert from '../utils/successAlert';
 import deleteImage from '../utils/deleteImage';
+import successAlert from '../utils/successAlert.js'
 
 const UploadProduct = () => {
   const [data,setData] = useState({
@@ -141,6 +141,7 @@ const UploadProduct = () => {
             description : "",
             more_details : {},
           })
+          console.log("data",data)
 
       }
     } catch (error) {
@@ -150,9 +151,9 @@ const UploadProduct = () => {
 
   }
 
-  // useEffect(()=>{
-  //   successAlert("Upload successfully")
-  // },[])
+  useEffect(()=>{
+    successAlert("Upload successfully")
+  },[])
   return (
     <section className=''>
         <div className='p-2   bg-white shadow-md flex items-center justify-between'>
