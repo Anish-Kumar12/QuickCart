@@ -257,7 +257,9 @@ const UploadProduct = () => {
                       {
                         allCategory.map((c,index)=>{
                           return(
-                            <option value={c?._id}>{c.name}</option>
+                            <option 
+                            key={c._id+index+"productsection"}
+                            value={c?._id}>{c.name}</option>
                           )
                         })
                       }
@@ -301,7 +303,9 @@ const UploadProduct = () => {
                       {
                         allSubCategory.map((c,index)=>{
                           return(
-                            <option value={c?._id}>{c.name}</option>
+                            <option 
+                            key={c._id+index+"productsection"}
+                            value={c?._id}>{c.name}</option>
                           )
                         })
                       }
@@ -384,7 +388,9 @@ const UploadProduct = () => {
                   {
                     Object?.keys(data?.more_details)?.map((k,index)=>{
                         return(
-                          <div className='grid gap-1'>
+                          <div 
+                            key={k+index+"productsection"}
+                          className='grid gap-1'>
                             <label htmlFor={k} className='font-medium'>{k}</label>
                             <input 
                               id={k}

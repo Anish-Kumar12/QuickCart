@@ -80,7 +80,6 @@ export const getProductController = async (request, response) => {
           },
         }
       : {};
-
     const skip = (page - 1) * limit;
 
     const [data, totalCount] = await Promise.all([
@@ -223,18 +222,6 @@ export const updateProductDetails = async (request, response) => {
         success: false,
       });
     }
-    const existingImageUrl = await ProductModel.findOne({ _id: _id }).select(
-      "image"
-    );
-    const Imageurl = request.body.image;
-
-    if (Imageurl !== existingImageUrl.image) {
-      const publicIdMatch = existingImageUrl.image.match(/\/([^\/]+)\.[^\/]+$/);
-      const publicId = publicIdMatch ? publicIdMatch[1] : null;
-      if (publicId) {
-        await deleteImageCloudinary(publicId);
-      }
-    }
     const updateProduct = await ProductModel.updateOne(
       { _id: _id },
       {
@@ -269,11 +256,15 @@ export const deleteProductDetails = async (request, response) => {
         success: false,
       });
     }
-    const Imageurl = request.body.image;
-    const publicIdMatch = Imageurl.match(/\/([^\/]+)\.[^\/]+$/);
-    const publicId = publicIdMatch ? publicIdMatch[1] : null;
-    if (publicId) {
-      await deleteImageCloudinary(publicId);
+    const existingImageUrl = await ProductModel.findOne({ _id: _id }).select(
+      "image"
+    );
+    for(let i = 0; i < existingImageUrl.image.length; i++){
+      const publicIdMatch = existingImageUrl.image[i].match(/\/([^\/]+)\.[^\/]+$/);
+      const publicId = publicIdMatch ? publicIdMatch[1] : null;
+      if (publicId) {
+        await deleteImageCloudinary(publicId);
+      }
     }
     const deleteProduct = await ProductModel.deleteOne({ _id: _id });
 
@@ -311,6 +302,8 @@ export const searchProduct = async (request, response) => {
           },
         }
       : {};
+
+    console.log(query);
 
     const skip = (page - 1) * limit;
 
