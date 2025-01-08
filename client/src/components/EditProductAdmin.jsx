@@ -275,7 +275,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   >
                     <option value={""}>Select Category</option>
                     {allCategory.map((c, index) => {
-                      return <option value={c?._id}>{c.name}</option>;
+                      return <option key={c._id + index + "productsection"} value={c?._id}>{c.name}</option>;
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
@@ -323,7 +323,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                       Select Sub Category
                     </option>
                     {allSubCategory.map((c, index) => {
-                      return <option value={c?._id}>{c.name}</option>;
+                      return <option key={c._id + index + "productsection"} value={c?._id}>{c.name}</option>;
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
@@ -414,7 +414,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
               {/**add more field**/}
               {Object?.keys(data?.more_details)?.map((k, index) => {
                 return (
-                  <div className="grid gap-1">
+                  <div key={k._id + index + "productsection"} className="grid gap-1">
                     <label htmlFor={k} className="font-medium">
                       {k}
                     </label>
