@@ -13,7 +13,6 @@ import {
 import Axios from "./utils/Axios";
 import SummaryApi from "./common/SummaryApi";
 
-
 function App() {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
@@ -57,9 +56,7 @@ function App() {
           )
         );
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     fetchUser();
@@ -68,13 +65,13 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="px-5">
       <Header />
       <main className="min-h-[78vh]">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 
