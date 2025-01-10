@@ -81,6 +81,7 @@ const Search = () => {
               placeholder="Search for products"
               autoFocus
               className="w-full h-full bg-transparent focus:outline-none"
+              onChange={handleOnChange}
             />
           </div>
         )}
