@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../assets/logo.png";
 import Search from "../components/Search";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -8,6 +7,7 @@ import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
+import logopic from "../assets/logopic.png";
 
 function Header() {
   const [isMobile] = usemobile();
@@ -39,16 +39,16 @@ function Header() {
         <div className="container mx-auto flex items-center h-full px-2 justify-between">
           {/**logo */}
           <div className="h-full">
-            <Link to={"/"} className="h-full flex justify-center items-center">
+            <Link to={"/"} className="h-full flex items-center">
               <img
-                src={logo}
-                width={170}
-                height={60}
+                src={logopic}
+                width={300}
+                height={70}
                 alt="logo"
                 className="hidden lg:block"
               />
               <img
-                src={logo}
+                src={logopic}
                 width={120}
                 height={60}
                 alt="logo"
