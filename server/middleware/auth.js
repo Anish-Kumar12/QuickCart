@@ -1,34 +1,36 @@
-import jwt from "jsonwebtoken";
-const auth = async (req, res, next) => {
-  try {
-    const token =
-    req.cookies.accesstoken || (req.headers.authorization && req.headers.authorization.split(" ")[1]);
-    console.log(token);
-    if (!token) {
-      return res.status(401).json({
-        message: "provide token",
-        error: true,
-        success: false,
-      });
-    }
-    const decoded = jwt.verify(token, process.env.SECRET_KEY_ACCESS_TOKEN);
-    if(!decoded){
-        return res.status(401).json({
-            message : "Unauthorized",
+import jwt from 'jsonwebtoken'
+
+const auth = async(request,response,next)=>{
+    try {
+        const token = request.cookies.accessToken || request?.headers?.authorization?.split(" ")[1]
+       
+        if(!token){
+            return response.status(401).json({
+                message : "Provide token"
+            })
+        }
+
+        const decode = await jwt.verify(token,process.env.SECRET_KEY_ACCESS_TOKEN)
+
+        if(!decode){
+            return response.status(401).json({
+                message : "unauthorized access",
+                error : true,
+                success : false
+            })
+        }
+
+        request.userId = decode.id
+
+        next()
+
+    } catch (error) {
+        return response.status(500).json({
+            message : "You have not login",///error.message || error,
             error : true,
             success : false
         })
-
     }
-    req.userId = decoded.id;
-    next();
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message || error,
-      error: true,
-      success: false,
-    });
-  }
-};
+}
 
-export default auth;
+export default auth

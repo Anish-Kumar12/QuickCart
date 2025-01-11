@@ -5,7 +5,6 @@ import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "../utils/AxiosToastError";
-import deleteImage from "../utils/deleteImage";
 
 const UploadCategoryModel = ({ close, fetchData }) => {
   const [data, setData] = useState({

@@ -9,4 +9,4 @@ addressRouter.get("/get",auth,getAddressController)
 addressRouter.put('/update',auth,updateAddressController)
 addressRouter.delete("/disable",auth,deleteAddresscontroller)
 
-export default addressRouter
+export default addressRouter    

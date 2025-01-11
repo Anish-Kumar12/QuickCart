@@ -7,7 +7,6 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import toast from 'react-hot-toast';
 import AxiosToastError from '../utils/AxiosToastError';
-import deleteImage from '../utils/deleteImage';
 
 const UploadSubCategoryModel = ({close, fetchData}) => {
     const [subCategoryData,setSubCategoryData] = useState({
@@ -81,7 +80,6 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
 
             const { data : responseData } = response
 
-            console.log("responseData",responseData)
             if(responseData.success){
                 toast.success(responseData.message)
                 if(close){

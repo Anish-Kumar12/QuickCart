@@ -12,6 +12,8 @@ import {
 } from "./store/ProductSlice";
 import Axios from "./utils/Axios";
 import SummaryApi from "./common/SummaryApi";
+import GlobalProvider from "./provider/GlobalProvider";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -65,13 +67,14 @@ function App() {
   }, []);
 
   return (
-    <div className="px-5">
-      <Header />
-      <main className="min-h-[78vh]">
-        <Outlet />
+    <GlobalProvider> 
+      <Header/>
+      <main className='min-h-[78vh]'>
+          <Outlet/>
       </main>
-      <Footer />
-    </div>
+      <Footer/>
+      <Toaster/>
+    </GlobalProvider>
   );
 }
 
