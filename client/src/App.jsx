@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useDispatch } from "react-redux";
 import fetchUserDetails from "./utils/fetchUserDetails";
-import { setUserDetails } from "./store/UserSlice";
+import { setUserDetails } from "./store/UserSlice.js";
 import {
   setAllCategory,
   setAllSubCategory,
