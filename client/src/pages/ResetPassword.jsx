@@ -46,12 +46,8 @@ const ResetPassword = () => {
         })
     }
 
-  console.log("data reset password",data)
-
   const handleSubmit = async(e)=>{
     e.preventDefault()
-
-    console.log("data",data)
 
     ///optional 
     if(data.newPassword !== data.confirmPassword){

@@ -14,6 +14,7 @@ import Axios from "./utils/Axios";
 import SummaryApi from "./common/SummaryApi";
 import GlobalProvider from "./provider/GlobalProvider";
 import { Toaster } from "react-hot-toast";
+import CartMobileLink from "./components/CartMobile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -74,6 +75,11 @@ function App() {
       </main>
       <Footer/>
       <Toaster/>
+      {
+        location.pathname !== '/checkout' && (
+          <CartMobileLink/>
+        )
+      }
     </GlobalProvider>
   );
 }

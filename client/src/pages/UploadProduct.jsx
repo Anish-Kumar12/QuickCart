@@ -10,8 +10,6 @@ import AddFieldComponent from '../components/AddFieldComponent';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
-import deleteImage from '../utils/deleteImage';
-import successAlert from '../utils/successAlert.js'
 
 const UploadProduct = () => {
   const [data,setData] = useState({
@@ -118,7 +116,6 @@ const UploadProduct = () => {
 
   const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log("data",data)
 
     try {
       const response = await Axios({
@@ -141,7 +138,6 @@ const UploadProduct = () => {
             description : "",
             more_details : {},
           })
-          console.log("data",data)
 
       }
     } catch (error) {
