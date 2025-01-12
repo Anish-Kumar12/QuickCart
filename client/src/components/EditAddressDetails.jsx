@@ -7,18 +7,28 @@ import AxiosToastError from '../utils/AxiosToastError'
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from '../provider/GlobalProvider'
 
-const AddAddress = ({close}) => {
-    const { register, handleSubmit,reset } = useForm()
+const EditAddressDetails = ({close, data}) => {
+    const { register, handleSubmit,reset } = useForm({
+        defaultValues : {
+            _id : data._id,
+            userId : data.userId,
+            address_line :data.address_line,
+            city : data.city,
+            state : data.state,
+            country : data.country,
+            pincode : data.pincode,
+            mobile : data.mobile 
+        }
+    })
     const { fetchAddress } = useGlobalContext()
 
     const onSubmit = async(data)=>{
-        console.log("data",data)
-    
         try {
             const response = await Axios({
-                ...SummaryApi.createAddress,
+                ...SummaryApi.updateAddress,
                 data : {
-                    address_line :data.addressline,
+                    ...data,
+                    address_line :data.address_line,
                     city : data.city,
                     state : data.state,
                     country : data.country,
@@ -45,7 +55,7 @@ const AddAddress = ({close}) => {
     <section className='bg-black fixed top-0 left-0 right-0 bottom-0 z-50 bg-opacity-70 h-screen overflow-auto'>
         <div className='bg-white p-4 w-full max-w-lg mt-8 mx-auto rounded'>
             <div className='flex justify-between items-center gap-4'>
-                <h2 className='font-semibold'>Add Address</h2>
+                <h2 className='font-semibold'>Edit Address</h2>
                 <button onClick={close} className='hover:text-red-500'>
                     <IoClose  size={25}/>
                 </button>
@@ -57,7 +67,7 @@ const AddAddress = ({close}) => {
                         type='text'
                         id='addressline' 
                         className='border bg-blue-50 p-2 rounded'
-                        {...register("addressline",{required : true})}
+                        {...register("address_line",{required : true})}
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -113,4 +123,4 @@ const AddAddress = ({close}) => {
   )
 }
 
-export default AddAddress
+export default EditAddressDetails
