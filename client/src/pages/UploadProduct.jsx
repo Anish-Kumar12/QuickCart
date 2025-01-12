@@ -10,6 +10,7 @@ import AddFieldComponent from '../components/AddFieldComponent.jsx';
 import Axios from '../utils/Axios.js';
 import SummaryApi from '../common/SummaryApi.js';
 import AxiosToastError from '../utils/AxiosToastError.js';
+import successAlert from '../utils/successAlert.js';
 
 const UploadProduct = () => {
   const [data,setData] = useState({
