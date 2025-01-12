@@ -4,7 +4,7 @@ import OrderModel from "../models/order.model.js";
 import UserModel from "../models/user.model.js";
 import mongoose from "mongoose";
 
- export async function CashOnDeliveryOrderController(request,response){
+export async function CashOnDeliveryOrderController(request,response){
     try {
         const userId = request.userId // auth middleware 
         const { list_items, totalAmt, addressId,subTotalAmt } = request.body 
@@ -145,6 +145,45 @@ const getOrderProductItems = async({
     return productList
 }
 
+//http://localhost:3000/api/order/webhook
+export async function webhookStripe(request,response){
+    const event = request.body;
+    const endPointSecret = process.env.STRIPE_ENPOINT_WEBHOOK_SECRET_KEY
+
+    console.log("event",event)
+
+    // Handle the event
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      const lineItems = await Stripe.checkout.sessions.listLineItems(session.id)
+      const userId = session.metadata.userId
+      const orderProduct = await getOrderProductItems(
+        {
+            lineItems : lineItems,
+            userId : userId,
+            addressId : session.metadata.addressId,
+            paymentId  : session.payment_intent,
+            payment_status : session.payment_status,
+        })
+    
+      const order = await OrderModel.insertMany(orderProduct)
+
+        console.log(order)
+        if(Boolean(order[0])){
+            const removeCartItems = await  UserModel.findByIdAndUpdate(userId,{
+                shopping_cart : []
+            })
+            const removeCartProductDB = await CartProductModel.deleteMany({ userId : userId})
+        }
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  // Return a response to acknowledge receipt of the event
+  response.json({received: true});
+}
 
 
 export async function getOrderDetailsController(request,response){

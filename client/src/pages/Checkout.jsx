@@ -1,17 +1,18 @@
+
 import React, { useState } from 'react'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
-import AddAddress from '../components/AddAddress.jsx'
+import AddAddress from '../components/AddAddress'
 import { useSelector } from 'react-redux'
 import AxiosToastError from '../utils/AxiosToastError'
 import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-// import { loadStripe } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 const Checkout = () => {
-  const { notDiscountTotalPrice, totalPrice, totalQty, fetchCartItem} = useGlobalContext()
+  const { notDiscountTotalPrice, totalPrice, totalQty, fetchCartItem,fetchOrder } = useGlobalContext()
   const [openAddress, setOpenAddress] = useState(false)
   const addressList = useSelector(state => state.addresses.addressList)
   const [selectAddress, setSelectAddress] = useState(0)
@@ -19,41 +20,68 @@ const Checkout = () => {
   const navigate = useNavigate()
 
   const handleCashOnDelivery = async() => {
-    try {
-        const response = await Axios({
-          ...SummaryApi.CashOnDeliveryOrder,
-          data : {
-            list_items : cartItemsList,
-            addressId : addressList[selectAddress]?._id,
-            subTotalAmt : totalPrice,
-            totalAmt :  totalPrice,
+      try {
+          const response = await Axios({
+            ...SummaryApi.CashOnDeliveryOrder,
+            data : {
+              list_items : cartItemsList,
+              addressId : addressList[selectAddress]?._id,
+              subTotalAmt : totalPrice,
+              totalAmt :  totalPrice,
+            }
+          })
+
+          const { data : responseData } = response
+
+          if(responseData.success){
+              toast.success(responseData.message)
+              if(fetchCartItem){
+                fetchCartItem()
+              }
+              if(fetchOrder){
+                fetchOrder()
+              }
+              navigate('/success',{
+                state : {
+                  text : "Order"
+                }
+              })
           }
+
+      } catch (error) {
+        AxiosToastError(error)
+      }
+  }
+
+  const handleOnlinePayment = async()=>{
+    try {
+        toast.loading("Loading...")
+        const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY
+        const stripePromise = await loadStripe(stripePublicKey)
+       
+        const response = await Axios({
+            ...SummaryApi.payment_url,
+            data : {
+              list_items : cartItemsList,
+              addressId : addressList[selectAddress]?._id,
+              subTotalAmt : totalPrice,
+              totalAmt :  totalPrice,
+            }
         })
 
         const { data : responseData } = response
 
-        if(responseData.success){
-            toast.success(responseData.message)
-            if(fetchCartItem){
-              fetchCartItem()
-            }
-            // if(fetchOrder){
-            //   fetchOrder()
-            // }
-            navigate('/success',{
-              state : {
-                text : "Order"
-              }
-            })
+        stripePromise.redirectToCheckout({ sessionId : responseData.id })
+        
+        if(fetchCartItem){
+          fetchCartItem()
         }
-
+        if(fetchOrder){
+          fetchOrder()
+        }
     } catch (error) {
-      AxiosToastError(error)
+        AxiosToastError(error)
     }
-}
-
-  const handleOnlinePayment = async()=>{
-    console.log("handleOnlinePayment")
   }
   return (
     <section className='bg-blue-50'>
@@ -65,7 +93,7 @@ const Checkout = () => {
             {
               addressList.map((address, index) => {
                 return (
-                  <label htmlFor={"address" + index} className={!address.status && "hidden"} key={index}>
+                  <label htmlFor={"address" + index} className={!address.status && "hidden"}>
                     <div className='border rounded p-3 flex gap-3 hover:bg-blue-50'>
                       <div>
                         <input id={"address" + index} type='radio' value={index} onChange={(e) => setSelectAddress(e.target.value)} name='address' />

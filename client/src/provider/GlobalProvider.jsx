@@ -31,10 +31,11 @@ const GlobalProvider = ({children}) => {
     
           if(responseData.success){
             dispatch(handleAddItemCart(responseData.data))
+            console.log(responseData)
           }
     
         } catch (error) {
-          AxiosToastError(error)
+          console.log(error)
         }
     }
 
@@ -116,12 +117,26 @@ const GlobalProvider = ({children}) => {
           // AxiosToastError(error)
       }
     }
+    const fetchOrder = async()=>{
+      try {
+        const response = await Axios({
+          ...SummaryApi.getOrderItems,
+        })
+        const { data : responseData } = response
 
+        if(responseData.success){
+            dispatch(setOrder(responseData.data))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     useEffect(()=>{
       fetchCartItem()
       handleLogoutOut()
       fetchAddress()
+      fetchOrder()
     },[user])
     
     return(
@@ -133,6 +148,7 @@ const GlobalProvider = ({children}) => {
             totalPrice,
             totalQty,
             notDiscountTotalPrice,
+            fetchOrder
         }}>
             {children}
         </GlobalContext.Provider>
