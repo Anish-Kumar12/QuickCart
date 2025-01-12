@@ -6,7 +6,7 @@ import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import toast from 'react-hot-toast';
-import { setUserDetails } from '../store/userSlice';
+import { setUserDetails } from '../store/UserSlice.js';
 import fetchUserDetails from '../utils/fetchUserDetails';
 
 
