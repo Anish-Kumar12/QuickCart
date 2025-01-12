@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import UploadSubCategoryModel from '../components/UploadSubCategoryModel'
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
-import SummaryApi from '../common/SummaryApi'
-import DisplayTable from '../components/DisplayTable'
+import UploadSubCategoryModel from '../components/UploadSubCategoryModel.jsx'
+import AxiosToastError from '../utils/AxiosToastError.js'
+import Axios from '../utils/Axios.js'
+import SummaryApi from '../common/SummaryApi.js'
+import DisplayTable from '../components/DisplayTable.jsx'
 import { createColumnHelper } from '@tanstack/react-table'
-import ViewImage from '../components/ViewImage'
+import ViewImage from '../components/ViewImage.jsx'
 import { MdDelete  } from "react-icons/md";
 import { HiPencil } from "react-icons/hi";
-import EditSubCategory from '../components/EditSubCategory'
-import CofirmBox from '../components/ConfirmBox'
+import EditSubCategory from '../components/EditSubCategory.jsx'
+import CofirmBox from '../components/ConfirmBox.jsx'
 import toast, { Toaster } from 'react-hot-toast'
 
 const SubCategoryPage = () => {

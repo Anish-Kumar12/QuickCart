@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import UploadCategoryModel from "../components/UploadCategoryModel";
-import Loading from "../components/Loading";
-import NoData from "../components/NoData";
-import Axios from "../utils/Axios";
-import SummaryApi from "../common/SummaryApi";
-import EditCategory from "../components/EditCategory";
-import CofirmBox from "../components/ConfirmBox";
+import UploadCategoryModel from "../components/UploadCategoryModel.jsx";
+import Loading from "../components/Loading.jsx";
+import NoData from "../components/NoData.jsx";
+import Axios from "../utils/Axios.js";
+import SummaryApi from "../common/SummaryApi.js";
+import EditCategory from "../components/EditCategory.jsx";
+import CofirmBox from "../components/ConfirmBox.jsx";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
+import AxiosToastError from "../utils/AxiosToastError.js";
 
 const CategoryPage = () => {
   const [openUploadCategory, setOpenUploadCategory] = useState(false);

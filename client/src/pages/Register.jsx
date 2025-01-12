@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
-import Axios from "../utils/Axios";
-import SummaryApi from "../common/SummaryApi";
-import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../utils/Axios.js";
+import SummaryApi from "../common/SummaryApi.js";
+import AxiosToastError from "../utils/AxiosToastError.js";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {

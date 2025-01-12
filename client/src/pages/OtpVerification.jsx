@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast';
-import Axios from '../utils/Axios';
-import SummaryApi from '../common/SummaryApi';
-import AxiosToastError from '../utils/AxiosToastError';
+import Axios from '../utils/Axios.js';
+import SummaryApi from '../common/SummaryApi.js';
+import AxiosToastError from '../utils/AxiosToastError.js';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const OtpVerification = () => {

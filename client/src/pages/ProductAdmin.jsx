@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react'
-import SummaryApi from '../common/SummaryApi'
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
-import Loading from '../components/Loading'
-import ProductCardAdmin from '../components/ProductCardAdmin'
+import SummaryApi from '../common/SummaryApi.js'
+import AxiosToastError from '../utils/AxiosToastError.js'
+import Axios from '../utils/Axios.js'
+import Loading from '../components/Loading.jsx'
+import ProductCardAdmin from '../components/ProductCardAdmin.jsx'
 import { IoSearchOutline } from "react-icons/io5";
 
 const ProductAdmin = () => {

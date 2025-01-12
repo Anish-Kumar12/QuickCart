@@ -2,9 +2,9 @@ import React from 'react'
 import banner from '../assets/banner.jpg'
 import bannerMobile from '../assets/banner-mobile.jpg'
 import { useSelector } from 'react-redux'
-import { valideURLConvert } from '../utils/valideURLConvert'
+import { valideURLConvert } from '../utils/valideURLConvert.js'
 import {Link, useNavigate} from 'react-router-dom'
-import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay'
+import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay.jsx'
 
 const Home = () => {
   const loadingCategory = useSelector(state => state.product.loadingCategory)

@@ -1,13 +1,13 @@
 
 import React, { useEffect, useState } from 'react'
-import Axios from '../utils/Axios'
-import SummaryApi from '../common/SummaryApi'
+import Axios from '../utils/Axios.js'
+import SummaryApi from '../common/SummaryApi.js'
 import { Link, useParams } from 'react-router-dom'
-import AxiosToastError from '../utils/AxiosToastError'
-import Loading from '../components/Loading'
-import CardProduct from '../components/CardProduct'
+import AxiosToastError from '../utils/AxiosToastError.js'
+import Loading from '../components/Loading.jsx'
+import CardProduct from '../components/CardProduct.jsx'
 import { useSelector } from 'react-redux'
-import { valideURLConvert } from '../utils/valideURLConvert'
+import { valideURLConvert } from '../utils/valideURLConvert.js'
 
 const ProductList = () => {
   const [data, setData] = useState([])

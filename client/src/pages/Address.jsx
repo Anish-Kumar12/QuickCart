@@ -1,15 +1,15 @@
 
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import AddAddress from '../components/AddAddress'
+import AddAddress from '../components/AddAddress.jsx'
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import EditAddressDetails from '../components/EditAddressDetails.jsx';
-import Axios from '../utils/Axios';
-import SummaryApi from '../common/SummaryApi';
+import Axios from '../utils/Axios.js';
+import SummaryApi from '../common/SummaryApi.js';
 import toast from 'react-hot-toast';
-import AxiosToastError from '../utils/AxiosToastError';
-import { useGlobalContext } from '../provider/GlobalProvider';
+import AxiosToastError from '../utils/AxiosToastError.js';
+import { useGlobalContext } from '../provider/GlobalProvider.jsx';
 
 const Address = () => {
   const addressList = useSelector(state => state.addresses.addressList)
