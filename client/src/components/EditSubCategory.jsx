@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
-import uploadImage from '../utils/UploadImage';
+import uploadImage from '../utils/UploadImage.js';
 import { useSelector } from 'react-redux';
-import Axios from '../utils/Axios';
-import SummaryApi from '../common/SummaryApi';
+import Axios from '../utils/Axios.js';
+import SummaryApi from '../common/SummaryApi.js';
 import toast, { Toaster } from 'react-hot-toast';
-import AxiosToastError from '../utils/AxiosToastError';
-import deleteImage from '../utils/DeleteImage';
+import AxiosToastError from '../utils/AxiosToastError.js';
+import deleteImage from '../utils/deleteImage.js';
 
 const EditSubCategory = ({close,data,fetchData}) => {
     const [originalImage, setOriginalImage] = useState(data.image);

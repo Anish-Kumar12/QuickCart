@@ -1,7 +1,7 @@
 import React from 'react'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees.js'
 import { Link } from 'react-router-dom'
-import { valideURLConvert } from '../utils/valideURLConvert'
+import { valideURLConvert } from '../utils/valideURLConvert.js'
 import { pricewithDiscount } from '../utils/PriceWithDiscount.js'
 import { useState } from 'react'
 import AddToCartButton from './AddToCartButton.jsx'

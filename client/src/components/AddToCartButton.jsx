@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../provider/GlobalProvider.jsx'
-import Axios from '../utils/Axios'
-import SummaryApi from '../common/SummaryApi'
+import Axios from '../utils/Axios.js'
+import SummaryApi from '../common/SummaryApi.js'
 import toast from 'react-hot-toast'
-import AxiosToastError from '../utils/AxiosToastError'
-import Loading from './Loading'
+import AxiosToastError from '../utils/AxiosToastError.js'
+import Loading from './Loading.jsx'
 import { useSelector } from 'react-redux'
 import { FaMinus, FaPlus } from "react-icons/fa6";
 

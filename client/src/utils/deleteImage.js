@@ -1,5 +1,5 @@
 import Axios from "../utils/Axios"
-import SummaryApi from "../common/SummaryApi"
+import SummaryApi from "../common/SummaryApi.js"
 
 const deleteImage = async(url)=>{
     try{

@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import Divider from './Divider'
-import Axios from '../utils/Axios'
-import SummaryApi from '../common/SummaryApi'
-import { logout } from '../store/userSlice'
+import Divider from './Divider.jsx'
+import Axios from '../utils/Axios.js'
+import SummaryApi from '../common/SummaryApi.js'
+import { logout } from '../store/UserSlice.js'
 import toast from 'react-hot-toast'
-import AxiosToastError from '../utils/AxiosToastError'
+import AxiosToastError from '../utils/AxiosToastError.js'
 import { HiOutlineExternalLink } from "react-icons/hi";
-import isAdmin from '../utils/isAdmin'
+import isAdmin from '../utils/isAdmin.js'
 
 const UserMenu = ({close}) => {
    const user = useSelector((state)=> state.user)

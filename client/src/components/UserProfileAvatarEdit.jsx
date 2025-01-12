@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { FaRegUserCircle } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import Axios from '../utils/Axios'
-import SummaryApi from '../common/SummaryApi'
-import AxiosToastError from '../utils/AxiosToastError'
-import { updatedAvatar } from '../store/userSlice'
+import Axios from '../utils/Axios.js'
+import SummaryApi from '../common/SummaryApi.js'
+import AxiosToastError from '../utils/AxiosToastError.js'
+import { updatedAvatar } from '../store/UserSlice.js'
 import { IoClose } from "react-icons/io5";
 
 const UserProfileAvatarEdit = ({close}) => {

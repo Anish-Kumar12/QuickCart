@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
-import useMobile from "../hooks/UseMobile";
+import useMobile from "../hooks/UseMobile.jsx";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { useGlobalContext } from "../provider/GlobalProvider";
+import { useGlobalContext } from "../provider/GlobalProvider.jsx";
 import { FaCartShopping } from "react-icons/fa6";
-import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupees";
+import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupees.js";
 import { Link } from "react-router-dom";
 import { FaCaretRight } from "react-icons/fa";
 import { useSelector } from "react-redux";

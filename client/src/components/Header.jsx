@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Search from "../components/Search";
+import Search from "../components/Search.jsx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
-import usemobile from "../hooks/UseMobile";
+import usemobile from "../hooks/UseMobile.jsx";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
-import UserMenu from "./UserMenu";
+import UserMenu from "./UserMenu.jsx";
 import logopic from "../assets/logopic.png";
-import { useGlobalContext } from "../provider/GlobalProvider";
+import { useGlobalContext } from "../provider/GlobalProvider.jsx";
 import DisplayCartItem from "./DisplayCartItem.jsx";
 import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupees.js";
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import uploadImage from "../utils/UploadImage";
-import Axios from "../utils/Axios";
-import SummaryApi from "../common/SummaryApi";
+import uploadImage from "../utils/UploadImage.js";
+import Axios from "../utils/Axios.js";
+import SummaryApi from "../common/SummaryApi.js";
 import toast from "react-hot-toast";
-import AxiosToastError from "../utils/AxiosToastError";
-import deleteImage from "../utils/DeleteImage";
+import AxiosToastError from "../utils/AxiosToastError.js";
+import deleteImage from "../utils/deleteImage.js";
 
 const EditCategory = ({ close, fetchData, data: CategoryData }) => {
   const [originalImage, setOriginalImage] = useState(CategoryData.image);

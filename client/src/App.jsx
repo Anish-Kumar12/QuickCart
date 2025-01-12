@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import { useDispatch } from "react-redux";
-import fetchUserDetails from "./utils/fetchUserDetails";
+import fetchUserDetails from "./utils/fetchUserDetails.js";
 import { setUserDetails } from "./store/UserSlice.js";
 import {
   setAllCategory,
   setAllSubCategory,
   setLoadingCategory,
 } from "./store/productSlice.js";
-import Axios from "./utils/Axios";
-import SummaryApi from "./common/SummaryApi";
-import GlobalProvider from "./provider/GlobalProvider";
+import Axios from "./utils/Axios.js";
+import SummaryApi from "./common/SummaryApi.js";
+import GlobalProvider from "./provider/GlobalProvider.jsx";
 import { Toaster } from "react-hot-toast";
-import CartMobileLink from "./components/CartMobile";
+import CartMobileLink from "./components/CartMobile.jsx";
 
 function App() {
   const [count, setCount] = useState(0);

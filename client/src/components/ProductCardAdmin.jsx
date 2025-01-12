@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import EditProductAdmin from './EditProductAdmin'
+import EditProductAdmin from './EditProductAdmin.jsx'
 import { IoClose } from 'react-icons/io5'
-import SummaryApi from '../common/SummaryApi'
-import Axios from '../utils/Axios'
-import AxiosToastError from '../utils/AxiosToastError'
+import SummaryApi from '../common/SummaryApi.js'
+import Axios from '../utils/Axios.js'
+import AxiosToastError from '../utils/AxiosToastError.js'
 import toast, { Toaster } from 'react-hot-toast'
 
 const ProductCardAdmin = ({ data, fetchProductData }) => {
