@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './userSlice'
-import productReducer from './productSlice'
-import cartReducer from './cartProduct'
-import addressReducer from './addressSlice'
-import orderReducer from './orderSlice'
+import userReducer from './UserSlice.js'
+import productReducer from './productSlice.js'
+import cartReducer from './cartProduct.js'
+import addressReducer from './addressSlice.js'
+import orderReducer from './orderSlice.js'
 
 export const store = configureStore({
   reducer: {
