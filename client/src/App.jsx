@@ -9,7 +9,7 @@ import {
   setAllCategory,
   setAllSubCategory,
   setLoadingCategory,
-} from "./store/ProductSlice";
+} from "./store/productSlice.js";
 import Axios from "./utils/Axios";
 import SummaryApi from "./common/SummaryApi";
 import GlobalProvider from "./provider/GlobalProvider";
