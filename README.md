@@ -1,5 +1,3 @@
-Certainly! Here's a draft for a README file for your QuickCart project:
-
 ```markdown
 # QuickCart
 
