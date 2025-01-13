@@ -2,6 +2,9 @@
 
 QuickCart is a comprehensive e-commerce platform designed to enhance the online shopping experience. This project leverages modern web technologies to provide a seamless and efficient shopping experience for users.
 
+![Alt text](thumbnail.png?raw=true "Title")
+
+
 ## Features
 
 - **User-Friendly Interface**: A seamless and intuitive interface for both desktop and mobile users.
