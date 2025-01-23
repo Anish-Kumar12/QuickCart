@@ -2,6 +2,7 @@ import CategoryModel from "../models/category.model.js";
 import SubCategoryModel from "../models/subCategory.model.js";
 import ProductModel from "../models/products.model.js";
 import { deleteImageCloudinary } from "../utils/uploadImageCloudinary.js";
+import redis from "../dbconfig/redis.js";
 
 export const AddCategoryController = async (request, response) => {
   try {
@@ -22,13 +23,8 @@ export const AddCategoryController = async (request, response) => {
 
     const saveCategory = await addCategory.save();
 
-    if (!saveCategory) {
-      return response.status(500).json({
-        message: "Not Created",
-        error: true,
-        success: false,
-      });
-    }
+    // Clear the cache for categories
+    await redis.del("categories");
 
     return response.json({
       message: "Add Category",
@@ -47,7 +43,20 @@ export const AddCategoryController = async (request, response) => {
 
 export const getCategoryController = async (request, response) => {
   try {
+    // Check if categories are cached in Redis
+    const cachedCategories = await redis.get("categories");
+    if (cachedCategories) {
+      return response.json({
+        data: JSON.parse(cachedCategories),
+        error: false,
+        success: true
+      });
+    }
+
     const data = await CategoryModel.find().sort({ createdAt: -1 });
+
+    // Cache the categories in Redis
+    await redis.set("categories", JSON.stringify(data), 'EX', 3600); // Cache for 1 hour
 
     return response.json({
       data: data,
@@ -56,7 +65,7 @@ export const getCategoryController = async (request, response) => {
     });
   } catch (error) {
     return response.status(500).json({
-      message: error.messsage || error,
+      message: error.message || error,
       error: true,
       success: false,
     });
@@ -92,6 +101,9 @@ export const updateCategoryController = async (request, response) => {
         image,
       }
     );
+
+    // Clear the cache for categories
+    await redis.del("categories");
 
     return response.json({
       message: "Updated Category",
@@ -141,6 +153,9 @@ export const deleteCategoryController = async (request, response) => {
 
     const deleteCategory = await CategoryModel.deleteOne({ _id: _id });
 
+    // Clear the cache for categories
+    await redis.del("categories");
+
     return response.json({
       message: "Delete category successfully",
       data: deleteCategory,
@@ -149,7 +164,7 @@ export const deleteCategoryController = async (request, response) => {
     });
   } catch (error) {
     return response.status(500).json({
-      message: error.message || error,
+      message: "Category not found",
       success: false,
       error: true,
     });
