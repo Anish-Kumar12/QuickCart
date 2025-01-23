@@ -1,5 +1,6 @@
 import CartProductModel from "../models/cartProduct.modell.js";
 import UserModel from "../models/user.model.js";
+import redis from '../dbconfig/redis.js';
 
 export const addToCartItemController = async(request,response)=>{
     try {
