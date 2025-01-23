@@ -101,72 +101,6 @@ The `docker-compose.yml` file sets up the following services:
 - **Database**:
   - MongoDB container for data storage.
 
-### Example `docker-compose.yml`
-
-```yaml
-version: '3.8'
-services:
-  web:
-    depends_on:
-      - api
-    build:
-      context: ./client
-      dockerfile: Dockerfile.dev
-    ports:
-      - "5173:5173"
-    container_name: Quickcart-web
-    env_file:
-      - ./client/.env
-    develop:
-      watch:
-        - path: ./client/package*.json
-          action: rebuild
-        - path: ./client
-          target: /app
-          action: sync
-
-  api: 
-    depends_on:
-      - mongodb
-      - redis
-    build:
-      context: ./server
-      dockerfile: Dockerfile.dev
-    container_name: Quickcart-api
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./server/.env
-    develop:
-      watch:
-        - path: ./server/package*.json
-          action: rebuild
-        - path: ./server
-          target: /app
-          action: sync
-  
-  mongodb:
-    image: mongo
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-
-  redis:
-    image: redis/redis-stack
-    container_name: redis
-    ports:
-      - "6379:6379"
-      - "8001:8001"
-    
-volumes:
-  mongodb_data:
-    driver: local
-volumes:
-  mongo-data:
-```
-
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
@@ -177,5 +111,5 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any inquiries or feedback, please contact [your email].
+For any inquiries or feedback, please contact [anishkumar344567@gmail.com].
 
