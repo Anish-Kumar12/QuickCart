@@ -137,7 +137,6 @@ const getOrderProductItems = async({
                 subTotalAmt  : Number(item.amount_total / 100),
                 totalAmt  :  Number(item.amount_total / 100),
             }
-
             productList.push(paylod)
         }
     }
