@@ -2,7 +2,7 @@
 
 QuickCart is a comprehensive e-commerce platform designed to enhance the online shopping experience. This project leverages modern web technologies to provide a seamless and efficient shopping experience for users.
 
-![Alt text](thumb.png?raw=true "QuickCart")
+![QuickCart Thumbnail](thumb.png?raw=true "QuickCart")
 
 ## Features 🚀
 
@@ -16,6 +16,7 @@ QuickCart is a comprehensive e-commerce platform designed to enhance the online 
 - **MongoDB Database**: For scalable and flexible data management. 🗄️
 - **Image Management with Cloudinary**: Efficiently manage and optimize images using Cloudinary for seamless uploads and deletions. 📸
 - **Docker Integration**: Simplified setup and deployment using Docker containers. 🐳
+- **Redis Caching**: Enhanced performance with Redis for optimized data caching. ⚡
 
 ## Tech Stack 🛠️
 
@@ -26,6 +27,7 @@ QuickCart is a comprehensive e-commerce platform designed to enhance the online 
 - **Payment Integration**: Stripe
 - **Image Management**: Cloudinary
 - **Containerization**: Docker
+- **Caching**: Redis
 
 ## Installation 🧑‍💻
 
@@ -51,12 +53,12 @@ cd QuickCart
 
    This command will:
    - Build the frontend and backend Docker images.
-   - Start the MongoDB container.
+   - Start the MongoDB and Redis containers.
    - Link the services together.
 
 2. **Access the Application**:
-   - Frontend: `http://localhost:3000`
-   - Backend API: `http://localhost:5000`
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:3000`
 
 ### Without Docker ⚙️
 
@@ -100,6 +102,8 @@ The `docker-compose.yml` file sets up the following services:
   - Node.js API server.
 - **Database**:
   - MongoDB container for data storage.
+- **Caching**:
+  - Redis container for performance optimization.
 
 ## Contributing 🤝
 
