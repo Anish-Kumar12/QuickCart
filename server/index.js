@@ -13,6 +13,7 @@ import productRouter from './routes/product.route.js';
 import cartRouter from './routes/cart.route.js';
 import addressRouter from './routes/address.route.js';
 import orderRouter from './routes/order.route.js';
+import { connectRedis } from './dbconfig/redis.js';
 dotenv.config();
 
 const app = express();
@@ -27,12 +28,7 @@ app.use(helmet({
     crossOriginResourcePolicy : false
 }))
 const PORT = process.env.PORT
-app.get("/",(request,response)=>{
-    //server to client 
-    response.json({
-        message : "Server is Running" + PORT
-    })
-})
+export const redis = connectRedis(process.env.REDIS_URL)    
 app.use('/api/user',userRouter);
 app.use("/api/category",categoryRouter)
 app.use("/api/file",uploadRouter)
@@ -41,11 +37,6 @@ app.use("/api/product",productRouter)
 app.use("/api/cart",cartRouter)
 app.use("/api/address",addressRouter)
 app.use('/api/order',orderRouter)
-
-
-
-
-
 
 connectDB().then(()=>{
     app.listen(PORT, () => {

@@ -2,7 +2,7 @@ import CategoryModel from "../models/category.model.js";
 import SubCategoryModel from "../models/subCategory.model.js";
 import ProductModel from "../models/products.model.js";
 import { deleteImageCloudinary } from "../utils/uploadImageCloudinary.js";
-import redis from "../dbconfig/redis.js";
+import { redis } from "../index.js";
 
 export const AddCategoryController = async (request, response) => {
   try {
@@ -46,6 +46,7 @@ export const getCategoryController = async (request, response) => {
     // Check if categories are cached in Redis
     const cachedCategories = await redis.get("categories");
     if (cachedCategories) {
+      console.log('Cached Categories');
       return response.json({
         data: JSON.parse(cachedCategories),
         error: false,

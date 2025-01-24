@@ -22,7 +22,7 @@ services:
   api: 
     depends_on:
       - mongodb
-      # - redis
+      - redis
     build:
       context: ./server
       dockerfile: Dockerfile.dev
@@ -47,12 +47,12 @@ services:
     volumes:
       - mongodb_data:/data/db
 
-  # redis:
-  #   image: redis/redis-stack
-  #   container_name: redis
-  #   ports:
-  #     - "6379:6379"
-  #     - "8001:8001"
+  redis:
+    image: redis/redis-stack
+    container_name: redis
+    ports:
+      - "6379:6379"
+      - "8001:8001"
     
 volumes:
   mongodb_data:

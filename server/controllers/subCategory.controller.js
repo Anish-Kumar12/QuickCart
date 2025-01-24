@@ -1,5 +1,8 @@
 import SubCategoryModel from "../models/subCategory.model.js";
 import { deleteImageCloudinary } from "../utils/uploadImageCloudinary.js";
+import { redis } from "../index.js";
+
+const SUBCATEGORY_CACHE_KEY = "subcategories";
 
 export const AddSubCategoryController = async (request, response) => {
   try {
@@ -22,6 +25,9 @@ export const AddSubCategoryController = async (request, response) => {
     const createSubCategory = new SubCategoryModel(payload);
     const save = await createSubCategory.save();
 
+    // Clear Redis cache
+    await redis.del(SUBCATEGORY_CACHE_KEY);
+
     return response.json({
       message: "Sub Category Created",
       data: save,
@@ -39,9 +45,25 @@ export const AddSubCategoryController = async (request, response) => {
 
 export const getSubCategoryController = async (request, response) => {
   try {
+    // Check if data is in Redis cache
+    const cachedData = await redis.get(SUBCATEGORY_CACHE_KEY);
+    if (cachedData) {
+      console.log("Sub Category data (from cache)");
+      return response.json({
+        message: "Sub Category data (from cache)",
+        data: JSON.parse(cachedData),
+        error: false,
+        success: true,
+      });
+    }
+
     const data = await SubCategoryModel.find()
       .sort({ createdAt: -1 })
       .populate("category");
+
+    // Store data in Redis cache
+    await redis.set(SUBCATEGORY_CACHE_KEY, JSON.stringify(data));
+
     return response.json({
       message: "Sub Category data",
       data: data,
@@ -94,6 +116,9 @@ export const updateSubCategoryController = async (request, response) => {
       category,
     });
 
+    // Clear Redis cache
+    await redis.del(SUBCATEGORY_CACHE_KEY);
+
     return response.json({
       message: "Updated Successfully",
       data: updateSubCategory,
@@ -128,6 +153,9 @@ export const deleteSubCategoryController = async (request, response) => {
       await deleteImageCloudinary(publicId);
     }
     const deleteSub = await SubCategoryModel.findByIdAndDelete(_id);
+
+    // Clear Redis cache
+    await redis.del(SUBCATEGORY_CACHE_KEY);
 
     return response.json({
       message: "Delete successfully",
